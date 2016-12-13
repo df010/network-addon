@@ -1,0 +1,20 @@
+#!/bin/bash
+set -x
+
+FILE_PATH=/var/vcap/sys/log/iptables/iptables.sample
+sudo iptables -t nat -nvL #use this command to start iptables
+sudo iptables-save | sudo tee $FILE_PATH
+MYDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#MYDIR="$(dirname "$(realpath "$0")")"
+
+<%p("iptables.nat.mapping").each do |mp|%>
+${MYDIR}/del $FILE_PATH <%=mp['from']%>
+<%end%>
+
+NAT_NUM=`grep -n "^*nat" $FILE_PATH |cut -d: -f 1`
+INSERT_POSITION=`grep -n "^COMMIT" $FILE_PATH|cut -d: -f 1|awk -vNAT_NUM=$NAT_NUM '{if($0 > NAT_NUM) print $0; }'|head -1`
+
+<%p("iptables.nat.mapping").each do |mp|%>
+${MYDIR}/add $FILE_PATH $INSERT_POSITION <%=mp['from']%>  <%=mp['to']%>
+<%end%>
+sudo cat $FILE_PATH | sudo iptables-restore 

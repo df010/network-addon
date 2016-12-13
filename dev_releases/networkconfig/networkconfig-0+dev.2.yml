@@ -1,0 +1,15 @@
+name: networkconfig
+version: 0+dev.2
+commit_hash: non-git
+uncommitted_changes: false
+jobs:
+- name: iptables
+  version: 736055dde43631f77a936c3bac160edfe4057abc
+  fingerprint: 736055dde43631f77a936c3bac160edfe4057abc
+  sha1: 7d9d4f5ee1fbdf12a303c0be6afcceafa87c3d5e
+packages:
+- name: tmp
+  version: 100bedf6f31da1a4693c446f1ea93348ea7a7a9d
+  fingerprint: 100bedf6f31da1a4693c446f1ea93348ea7a7a9d
+  sha1: abab01f3cd166f49d3f01c9322faf5a794e33a1d
+  dependencies: []

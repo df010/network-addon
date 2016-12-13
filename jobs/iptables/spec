@@ -1,0 +1,18 @@
+---
+name: iptables
+templates:
+  pre-start.erb: bin/pre-start
+  add.erb: bin/add
+  del.erb: bin/del
+properties:
+  iptables.nat.mapping:
+    description: ip mappings
+    default: 
+    - from: 172.25.58
+      to: 30.17.84
+    - from: 172.25.59
+      to: 30.17.85
+    - from: 172.26.224
+      to: 30.17.224
+    - from: 172.26.225
+      to: 30.17.225

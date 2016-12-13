@@ -1,0 +1,4 @@
+#!/bin/bash
+for i in {1..254}; do
+  sed -i "${2}i -A OUTPUT -d ${3}.${i}/32 -j DNAT --to-destination ${4}.${i}" $1
+done

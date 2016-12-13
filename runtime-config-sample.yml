@@ -1,0 +1,17 @@
+releases:
+- name: networkconfig
+  version: 0+dev.2
+
+addons:
+- name: networkmapping 
+  jobs:
+  - name: iptables
+    release: networkconfig
+  include:
+    deployments: [cf-]
+  properties:
+    iptables:
+      nat:
+        mapping:
+        - from: 10.1.2
+          to: 20.3.4

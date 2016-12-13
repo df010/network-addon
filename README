@@ -1,0 +1,24 @@
+Bosh add-on for internal nat based on iptables.
+Install the bosh-cli written with golang 
+https://github.com/cloudfoundry/bosh-cli
+
+1. Generate bosh release
+Generate dev releases for debug
+bosh create-release --name networkconfig --tarball 
+The generated release file can be found in dev_releases/networkconfig/ 
+
+Generate final releases
+bosh create-release --name networkconfig --tarball --final
+The generated release file can be found in releases/networkconfig/
+
+2. Upload bosh release
+Upload this release with bosh upload-release RELEASE_FILE_PATH  (or bosh upload release RELEASE_FILE_PATH , if you are using ruby based bosh-cli)
+
+
+3. Download existing runtime config
+bosh runtime-config > config.yml
+4. Follow runtime-config-sample.yml to update config.yml .
+5. Update runtime-config:
+bosh update-runtime-config ./config.yml  (or bosh update runtime-config ./config.yml if you are using ruby based bosh cli)
+
+6. Redeploy your related deployments.
